@@ -8,6 +8,20 @@ class StarBucksHomePage extends StatefulWidget {
 }
 
 class _StarBucksHomePageState extends State<StarBucksHomePage> {
+  late PageController _pageController;
+
+  @override
+  void initState(){
+    super.initState();
+    _pageController = PageController();
+  }
+
+  @override
+  void dispose(){
+    _pageController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -110,13 +124,15 @@ class _StarBucksHomePageState extends State<StarBucksHomePage> {
           ),
           Container(
             height: 450.0,
-            child: ListView(
+            child: PageView(
+             physics: const BouncingScrollPhysics(),
+              controller: _pageController,
               scrollDirection: Axis.horizontal,
               children: [
                 _listScrollEffect("assets/images/starbucks_1.png", "Espresso"),
-                _listScrollEffect("assets/images/starbucks_2.png", "Espresso"),
-                _listScrollEffect("assets/images/starbucks_3.png", "Espresso"),
-                _listScrollEffect("assets/images/starbucks_4.png", "Espresso"),
+                _listScrollEffect("assets/images/starbucks_2.png", "Latte"),
+                _listScrollEffect("assets/images/starbucks_3.png", "Cappuccino"),
+                _listScrollEffect("assets/images/starbucks_4.png", "Mocha"),
               ],
             ),
           ),
@@ -134,8 +150,8 @@ Widget _listScrollEffect(String imgPath, String imgName) {
       children: [
         Image.asset(
           imgPath,
-          width: 250,
-          height: 250,
+          width: 300,
+          height: 350,
           fit: BoxFit.fill,
         ),
         const SizedBox(
